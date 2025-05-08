@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff0f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+            animation: fadeIn 2.5s ease-in-out;
+        }
+        
+        .countdown {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+        
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #f0f;
+            animation: fall 10s linear infinite;
+        }
+        
+        section {
+            padding: 80px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #ff6b93;
+        }
+        
+        .memories {
+            background-color: #fff;
+            position: relative;
+        }
+        
+        .memory-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .memory-card {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .memory-img {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .memory-content {
+            padding: 20px;
+        }
+        
+        .memory-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ff6b93;
+        }
+        
+        .wishes {
+            background-color: #fafaff;
+        }
+        
+        .wish-form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            resize: none;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .gift-btn {
+            padding: 15px 30px;
+            background-color: #ff6b93;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .gift-btn:hover {
+            background-color: #ff4f81;
+            transform: scale(1.05);
+        }
+        
+        .surprise {
+            background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gift-box {
+            width: 200px;
+            height: 200px;
+            background-color: #ff6b93;
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto 40px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .gift-box:before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 200px;
+            background-color: #ff4f81;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .gift-box:after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 40px;
+            background-color: #ff4f81;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .gift-message {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            display: none;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .playlist {
+            background-color: #fff;
+        }
+        
+        .playlist-container {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .song {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .song:hover {
+            transform: translateX(10px);
+            background-color: #fff0f5;
+        }
+        
+        .song-number {
+            font-size: 1.5rem;
+            margin-right: 20px;
+            color: #ff6b93;
+            font-weight: bold;
+        }
+        
+        .song-info {
+            flex-grow: 1;
+        }
+        
+        .song-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .song-artist {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .memory-card { width: 100%; }
+            .gift-box { width: 150px; height: 150px; }
+            .gift-box:before { width: 30px; height: 150px; }
+            .gift-box:after { width: 150px; height: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <h1>Happy Birthday!</h1>
+        <p class="subtitle">Celebrating Your Special Day - July 14th</p>
+        <div class="countdown" id="countdown"></div>
+        <p class="scroll-hint">Scroll down to explore your gift</p>
+        <!-- Confetti elements will be created by JavaScript -->
+    </header>
+    
+    <section class="memories" id="memories">
+        <div class="container">
+            <h2>Our Memories Together</h2>
+            <div class="memory-container">
+                <div class="memory-card">
+                    <div class="memory-img">
+                        <img src="/api/placeholder/300/200" alt="Memory 1">
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Remember When...</h3>
+                        <p>That amazing time when we [Add your memory here]. The laughter we shared made that day unforgettable!</p>
+                    </div>
+                </div>
+                
+                <div class="memory-card">
+                    <div class="memory-img">
+                        <img src="/api/placeholder/300/200" alt="Memory 2">
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">That Time We...</h3>
+                        <p>I'll never forget when we [Add another memory here]. Your smile lit up the entire place!</p>
+                    </div>
+                </div>
+                
+                <div class="memory-card">
+                    <div class="memory-img">
+                        <img src="/api/placeholder/300/200" alt="Memory 3">
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Our Adventure At...</h3>
+                        <p>Our spontaneous trip to [Add place here] showed me just how amazing you are at finding joy in everything!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="playlist" id="playlist">
+        <div class="container">
+            <h2>Birthday Playlist Just For You</h2>
+            <div class="playlist-container">
+                <div class="song">
+                    <div class="song-number">1</div>
+                    <div class="song-info">
+                        <div class="song-name">Happy</div>
+                        <div class="song-artist">Pharrell Williams</div>
+                    </div>
+                </div>
+                
+                <div class="song">
+                    <div class="song-number">2</div>
+                    <div class="song-info">
+                        <div class="song-name">Birthday</div>
+                        <div class="song-artist">Katy Perry</div>
+                    </div>
+                </div>
+                
+                <div class="song">
+                    <div class="song-number">3</div>
+                    <div class="song-info">
+                        <div class="song-name">Count On Me</div>
+                        <div class="song-artist">Bruno Mars</div>
+                    </div>
+                </div>
+                
+                <div class="song">
+                    <div class="song-number">4</div>
+                    <div class="song-info">
+                        <div class="song-name">Good Feelings</div>
+                        <div class="song-artist">Flo Rida</div>
+                    </div>
+                </div>
+                
+                <div class="song">
+                    <div class="song-number">5</div>
+                    <div class="song-info">
+                        <div class="song-name">Can't Stop the Feeling</div>
+                        <div class="song-artist">Justin Timberlake</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="wishes" id="wishes">
+        <div class="container">
+            <h2>Birthday Wishes</h2>
+            <div class="wish-form">
+                <p>I want to wish you the happiest of birthdays! You deserve all the joy, love, and success in the world. May this year bring you endless opportunities, beautiful moments, and everything your heart desires.</p>
+                <p>Your friendship has been one of the greatest gifts in my life. You've been there through thick and thin, always ready with a smile, a kind word, or a shoulder to lean on. Your kindness, intelligence, and wonderful spirit inspire me every day.</p>
+                <p>On your special day, I hope you feel as special and amazing as you truly are. Let's celebrate many more birthdays together!</p>
+                <p>With all my love,</p>
+                <p><strong>RR</strong></p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="surprise" id="surprise">
+        <div class="container">
+            <h2>A Special Surprise</h2>
+            <div class="gift-box" id="giftBox"></div>
+            <div class="gift-message" id="giftMessage">
+                <p>Surprise! As part of your birthday gift, I've planned [Add your surprise here - could be tickets to an event, a reservation somewhere special, a gift card, or whatever you're actually giving them]!</p>
+                <p>Check your messages for more details about this gift!</p>
+                <button class="gift-btn">I can't wait!</button>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Made with ❤️ just for you on your birthday - July 14, 2025</p>
+        <p>Click <a href="#home" style="color: #ff6b93;">here</a> to go back to the top</p>
+    </footer>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const birthday = new Date("July 14, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = birthday - now;
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            const countdownEl = document.getElementById('countdown');
+            
+            if (timeLeft > 0) {
+                countdownEl.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds until your birthday!`;
+            } else {
+                countdownEl.innerHTML = "Happy Birthday! Today is your special day!";
+                createConfetti();
+            }
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Create confetti elements
+        function createConfetti() {
+            const confettiCount = 100;
+            const header = document.querySelector('header');
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Random position, color, and delay
+                const left = Math.random() * 100;
+                const width = Math.random() * 10 + 5;
+                const height = Math.random() * 10 + 5;
+                const delay = Math.random() * 5;
+                const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                
+                confetti.style.left = `${left}%`;
+                confetti.style.width = `${width}px`;
+                confetti.style.height = `${height}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                header.appendChild(confetti);
+            }
+        }
+        
+        // Gift box reveal
+        document.getElementById('giftBox').addEventListener('click', function() {
+            this.style.transform = 'scale(0)';
+            setTimeout(() => {
+                this.style.display = 'none';
+                document.getElementById('giftMessage').style.display = 'block';
+                document.getElementById('giftMessage').style.animation = 'fadeIn 1s forwards';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
